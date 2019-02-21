@@ -1,0 +1,14 @@
+﻿@model Dictionary<string, double>
+@{
+    Layout = null;
+}
+@* Use the chartData dictionary passed through by the controller to generate a new chart *@
+@{
+    var myChart = new Chart(width: 400, height: 250)
+        .AddTitle("Sales per employee")
+        .AddSeries(
+            name: "Employee",
+            xValue: Model.Keys,
+            yValues: Model.Values)
+        .Write();
+}

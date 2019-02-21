@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="70284585127b4e55ac8be3c1c750bed6" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="HardwareDBModel.lgbrand" Width="1.5" PointX="0.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HardwareDBModel.lgcustomer" Width="1.5" PointX="10.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HardwareDBModel.lgdepartment" Width="1.5" PointX="0.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HardwareDBModel.lgemployee" Width="1.5" PointX="2.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HardwareDBModel.lginvoice" Width="1.5" PointX="6.875" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HardwareDBModel.lgline" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HardwareDBModel.lgproduct" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HardwareDBModel.lgsalary_history" Width="1.5" PointX="4.375" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HardwareDBModel.lgvendor" Width="1.5" PointX="0.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HardwareDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="HardwareDBModel.FK__lgproduct__brand__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="HardwareDBModel.FK__lginvoice__cust___4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="HardwareDBModel.FK__lgemploye__dept___4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="HardwareDBModel.FK__lginvoice__emplo__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="HardwareDBModel.FK__lgsalary___emp_n__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="HardwareDBModel.FK__lgline__inv_num__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="HardwareDBModel.FK__lgline__prod_sku__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="HardwareDBModel.lgsupplies" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

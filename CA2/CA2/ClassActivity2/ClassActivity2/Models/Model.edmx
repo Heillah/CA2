@@ -1,0 +1,707 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HardwareDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="lgbrand">
+          <Key>
+            <PropertyRef Name="brand_id" />
+          </Key>
+          <Property Name="brand_id" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="brand_name" Type="varchar" MaxLength="100" />
+          <Property Name="brand_type" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="lgcustomer">
+          <Key>
+            <PropertyRef Name="cust_code" />
+          </Key>
+          <Property Name="cust_code" Type="numeric" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="cust_fname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="cust_lname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="cust_street" Type="varchar" MaxLength="70" />
+          <Property Name="cust_city" Type="varchar" MaxLength="50" />
+          <Property Name="cust_state" Type="char" MaxLength="2" />
+          <Property Name="cust_zip" Type="char" MaxLength="5" />
+          <Property Name="cust_balance" Type="numeric" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="lgdepartment">
+          <Key>
+            <PropertyRef Name="dept_num" />
+          </Key>
+          <Property Name="dept_num" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="dept_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dept_mail_box" Type="varchar" MaxLength="3" />
+          <Property Name="dept_phone" Type="varchar" MaxLength="9" />
+          <Property Name="emp_num" Type="numeric" Precision="6" Scale="0" />
+        </EntityType>
+        <EntityType Name="lgemployee">
+          <Key>
+            <PropertyRef Name="emp_num" />
+          </Key>
+          <Property Name="emp_num" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="emp_fname" Type="varchar" MaxLength="20" />
+          <Property Name="emp_lname" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="emp_email" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="emp_phone" Type="varchar" MaxLength="20" />
+          <Property Name="emp_hireDATETIME" Type="datetime" Nullable="false" />
+          <Property Name="emp_title" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="emp_comm" Type="numeric" Precision="2" Scale="2" />
+          <Property Name="dept_num" Type="numeric" Precision="5" Scale="0" />
+        </EntityType>
+        <EntityType Name="lginvoice">
+          <Key>
+            <PropertyRef Name="inv_num" />
+          </Key>
+          <Property Name="inv_num" Type="numeric" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="inv_DATETIME" Type="datetime" />
+          <Property Name="cust_code" Type="numeric" Precision="38" Scale="0" />
+          <Property Name="inv_total" Type="numeric" Precision="11" Scale="2" />
+          <Property Name="employee_id" Type="numeric" Precision="6" Scale="0" />
+        </EntityType>
+        <EntityType Name="lgline">
+          <Key>
+            <PropertyRef Name="line_num" />
+          </Key>
+          <Property Name="inv_num" Type="numeric" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="line_num" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="prod_sku" Type="varchar" MaxLength="15" />
+          <Property Name="line_qty" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="line_price" Type="numeric" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="lgproduct">
+          <Key>
+            <PropertyRef Name="prod_sku" />
+          </Key>
+          <Property Name="prod_sku" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="prod_descript" Type="varchar" MaxLength="255" />
+          <Property Name="prod_type" Type="varchar" MaxLength="255" />
+          <Property Name="prod_base" Type="varchar" MaxLength="255" />
+          <Property Name="prod_category" Type="varchar" MaxLength="255" />
+          <Property Name="prod_price" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="prod_qoh" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="prod_min" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="brand_id" Type="numeric" Precision="4" Scale="0" />
+        </EntityType>
+        <EntityType Name="lgsalary_history">
+          <Key>
+            <PropertyRef Name="emp_num" />
+          </Key>
+          <Property Name="emp_num" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="sal_from" Type="datetime" />
+          <Property Name="sal_end" Type="datetime" />
+          <Property Name="sal_amount" Type="numeric" Precision="10" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HardwareDB.dbo.lgsupplies' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="lgsupplies">
+          <Key>
+            <PropertyRef Name="prod_sku" />
+            <PropertyRef Name="vend_id" />
+          </Key>
+          <Property Name="prod_sku" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="vend_id" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lgvendor">
+          <Key>
+            <PropertyRef Name="vend_id" />
+          </Key>
+          <Property Name="vend_id" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="vend_name" Type="varchar" MaxLength="255" />
+          <Property Name="vend_street" Type="varchar" MaxLength="50" />
+          <Property Name="vend_city" Type="varchar" MaxLength="50" />
+          <Property Name="vend_state" Type="varchar" MaxLength="2" />
+          <Property Name="vend_zip" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__lgemploye__dept___4316F928">
+          <End Role="lgdepartment" Type="Self.lgdepartment" Multiplicity="0..1" />
+          <End Role="lgemployee" Type="Self.lgemployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lgdepartment">
+              <PropertyRef Name="dept_num" />
+            </Principal>
+            <Dependent Role="lgemployee">
+              <PropertyRef Name="dept_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lginvoice__cust___4AB81AF0">
+          <End Role="lgcustomer" Type="Self.lgcustomer" Multiplicity="0..1" />
+          <End Role="lginvoice" Type="Self.lginvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lgcustomer">
+              <PropertyRef Name="cust_code" />
+            </Principal>
+            <Dependent Role="lginvoice">
+              <PropertyRef Name="cust_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lginvoice__emplo__4BAC3F29">
+          <End Role="lgemployee" Type="Self.lgemployee" Multiplicity="0..1" />
+          <End Role="lginvoice" Type="Self.lginvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lgemployee">
+              <PropertyRef Name="emp_num" />
+            </Principal>
+            <Dependent Role="lginvoice">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lgline__inv_num__4E88ABD4">
+          <End Role="lginvoice" Type="Self.lginvoice" Multiplicity="1" />
+          <End Role="lgline" Type="Self.lgline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lginvoice">
+              <PropertyRef Name="inv_num" />
+            </Principal>
+            <Dependent Role="lgline">
+              <PropertyRef Name="inv_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lgline__prod_sku__4F7CD00D">
+          <End Role="lgproduct" Type="Self.lgproduct" Multiplicity="0..1" />
+          <End Role="lgline" Type="Self.lgline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lgproduct">
+              <PropertyRef Name="prod_sku" />
+            </Principal>
+            <Dependent Role="lgline">
+              <PropertyRef Name="prod_sku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lgproduct__brand__398D8EEE">
+          <End Role="lgbrand" Type="Self.lgbrand" Multiplicity="0..1" />
+          <End Role="lgproduct" Type="Self.lgproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lgbrand">
+              <PropertyRef Name="brand_id" />
+            </Principal>
+            <Dependent Role="lgproduct">
+              <PropertyRef Name="brand_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lgsalary___emp_n__45F365D3">
+          <End Role="lgemployee" Type="Self.lgemployee" Multiplicity="1" />
+          <End Role="lgsalary_history" Type="Self.lgsalary_history" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="lgemployee">
+              <PropertyRef Name="emp_num" />
+            </Principal>
+            <Dependent Role="lgsalary_history">
+              <PropertyRef Name="emp_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lgsupplie__prod___3D5E1FD2">
+          <End Role="lgproduct" Type="Self.lgproduct" Multiplicity="1" />
+          <End Role="lgsupplies" Type="Self.lgsupplies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lgproduct">
+              <PropertyRef Name="prod_sku" />
+            </Principal>
+            <Dependent Role="lgsupplies">
+              <PropertyRef Name="prod_sku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lgsupplie__vend___3E52440B">
+          <End Role="lgvendor" Type="Self.lgvendor" Multiplicity="1" />
+          <End Role="lgsupplies" Type="Self.lgsupplies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lgvendor">
+              <PropertyRef Name="vend_id" />
+            </Principal>
+            <Dependent Role="lgsupplies">
+              <PropertyRef Name="vend_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HardwareDBModelStoreContainer">
+          <EntitySet Name="lgbrand" EntityType="Self.lgbrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lgcustomer" EntityType="Self.lgcustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lgdepartment" EntityType="Self.lgdepartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lgemployee" EntityType="Self.lgemployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lginvoice" EntityType="Self.lginvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lgline" EntityType="Self.lgline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lgproduct" EntityType="Self.lgproduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lgsalary_history" EntityType="Self.lgsalary_history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lgvendor" EntityType="Self.lgvendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lgsupplies" EntityType="Self.lgsupplies" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [lgsupplies].[prod_sku] AS [prod_sku], 
+    [lgsupplies].[vend_id] AS [vend_id]
+    FROM [dbo].[lgsupplies] AS [lgsupplies]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__lgemploye__dept___4316F928" Association="Self.FK__lgemploye__dept___4316F928">
+            <End Role="lgdepartment" EntitySet="lgdepartment" />
+            <End Role="lgemployee" EntitySet="lgemployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lginvoice__cust___4AB81AF0" Association="Self.FK__lginvoice__cust___4AB81AF0">
+            <End Role="lgcustomer" EntitySet="lgcustomer" />
+            <End Role="lginvoice" EntitySet="lginvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lginvoice__emplo__4BAC3F29" Association="Self.FK__lginvoice__emplo__4BAC3F29">
+            <End Role="lgemployee" EntitySet="lgemployee" />
+            <End Role="lginvoice" EntitySet="lginvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lgline__inv_num__4E88ABD4" Association="Self.FK__lgline__inv_num__4E88ABD4">
+            <End Role="lginvoice" EntitySet="lginvoice" />
+            <End Role="lgline" EntitySet="lgline" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lgline__prod_sku__4F7CD00D" Association="Self.FK__lgline__prod_sku__4F7CD00D">
+            <End Role="lgproduct" EntitySet="lgproduct" />
+            <End Role="lgline" EntitySet="lgline" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lgproduct__brand__398D8EEE" Association="Self.FK__lgproduct__brand__398D8EEE">
+            <End Role="lgbrand" EntitySet="lgbrand" />
+            <End Role="lgproduct" EntitySet="lgproduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lgsalary___emp_n__45F365D3" Association="Self.FK__lgsalary___emp_n__45F365D3">
+            <End Role="lgemployee" EntitySet="lgemployee" />
+            <End Role="lgsalary_history" EntitySet="lgsalary_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lgsupplie__prod___3D5E1FD2" Association="Self.FK__lgsupplie__prod___3D5E1FD2">
+            <End Role="lgproduct" EntitySet="lgproduct" />
+            <End Role="lgsupplies" EntitySet="lgsupplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lgsupplie__vend___3E52440B" Association="Self.FK__lgsupplie__vend___3E52440B">
+            <End Role="lgvendor" EntitySet="lgvendor" />
+            <End Role="lgsupplies" EntitySet="lgsupplies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HardwareDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="lgbrand">
+          <Key>
+            <PropertyRef Name="brand_id" />
+          </Key>
+          <Property Name="brand_id" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="brand_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="brand_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="lgproducts" Relationship="Self.FK__lgproduct__brand__398D8EEE" FromRole="lgbrand" ToRole="lgproduct" />
+        </EntityType>
+        <EntityType Name="lgcustomer">
+          <Key>
+            <PropertyRef Name="cust_code" />
+          </Key>
+          <Property Name="cust_code" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="cust_fname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cust_lname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cust_street" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="cust_city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cust_state" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="cust_zip" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="cust_balance" Type="Decimal" Precision="8" Scale="2" />
+          <NavigationProperty Name="lginvoices" Relationship="Self.FK__lginvoice__cust___4AB81AF0" FromRole="lgcustomer" ToRole="lginvoice" />
+        </EntityType>
+        <EntityType Name="lgdepartment">
+          <Key>
+            <PropertyRef Name="dept_num" />
+          </Key>
+          <Property Name="dept_num" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="dept_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dept_mail_box" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="dept_phone" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="emp_num" Type="Decimal" Precision="6" Scale="0" />
+          <NavigationProperty Name="lgemployees" Relationship="Self.FK__lgemploye__dept___4316F928" FromRole="lgdepartment" ToRole="lgemployee" />
+        </EntityType>
+        <EntityType Name="lgemployee">
+          <Key>
+            <PropertyRef Name="emp_num" />
+          </Key>
+          <Property Name="emp_num" Type="Decimal" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="emp_fname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="emp_lname" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emp_email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emp_phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="emp_hireDATETIME" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="emp_title" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emp_comm" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="dept_num" Type="Decimal" Precision="5" Scale="0" />
+          <NavigationProperty Name="lgdepartment" Relationship="Self.FK__lgemploye__dept___4316F928" FromRole="lgemployee" ToRole="lgdepartment" />
+          <NavigationProperty Name="lginvoices" Relationship="Self.FK__lginvoice__emplo__4BAC3F29" FromRole="lgemployee" ToRole="lginvoice" />
+          <NavigationProperty Name="lgsalary_history" Relationship="Self.FK__lgsalary___emp_n__45F365D3" FromRole="lgemployee" ToRole="lgsalary_history" />
+        </EntityType>
+        <EntityType Name="lginvoice">
+          <Key>
+            <PropertyRef Name="inv_num" />
+          </Key>
+          <Property Name="inv_num" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="inv_DATETIME" Type="DateTime" Precision="3" />
+          <Property Name="cust_code" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="inv_total" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="employee_id" Type="Decimal" Precision="6" Scale="0" />
+          <NavigationProperty Name="lgcustomer" Relationship="Self.FK__lginvoice__cust___4AB81AF0" FromRole="lginvoice" ToRole="lgcustomer" />
+          <NavigationProperty Name="lgemployee" Relationship="Self.FK__lginvoice__emplo__4BAC3F29" FromRole="lginvoice" ToRole="lgemployee" />
+          <NavigationProperty Name="lglines" Relationship="Self.FK__lgline__inv_num__4E88ABD4" FromRole="lginvoice" ToRole="lgline" />
+        </EntityType>
+        <EntityType Name="lgline">
+          <Key>
+            <PropertyRef Name="line_num" />
+          </Key>
+          <Property Name="inv_num" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="line_num" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="prod_sku" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="line_qty" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="line_price" Type="Decimal" Precision="8" Scale="2" />
+          <NavigationProperty Name="lginvoice" Relationship="Self.FK__lgline__inv_num__4E88ABD4" FromRole="lgline" ToRole="lginvoice" />
+          <NavigationProperty Name="lgproduct" Relationship="Self.FK__lgline__prod_sku__4F7CD00D" FromRole="lgline" ToRole="lgproduct" />
+        </EntityType>
+        <EntityType Name="lgproduct">
+          <Key>
+            <PropertyRef Name="prod_sku" />
+          </Key>
+          <Property Name="prod_sku" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prod_descript" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="prod_type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="prod_base" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="prod_category" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="prod_price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="prod_qoh" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="prod_min" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="brand_id" Type="Decimal" Precision="4" Scale="0" />
+          <NavigationProperty Name="lgbrand" Relationship="Self.FK__lgproduct__brand__398D8EEE" FromRole="lgproduct" ToRole="lgbrand" />
+          <NavigationProperty Name="lglines" Relationship="Self.FK__lgline__prod_sku__4F7CD00D" FromRole="lgproduct" ToRole="lgline" />
+          <NavigationProperty Name="lgvendors" Relationship="Self.lgsupplies" FromRole="lgproduct" ToRole="lgvendor" />
+        </EntityType>
+        <EntityType Name="lgsalary_history">
+          <Key>
+            <PropertyRef Name="emp_num" />
+          </Key>
+          <Property Name="emp_num" Type="Decimal" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="sal_from" Type="DateTime" Precision="3" />
+          <Property Name="sal_end" Type="DateTime" Precision="3" />
+          <Property Name="sal_amount" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="lgemployee" Relationship="Self.FK__lgsalary___emp_n__45F365D3" FromRole="lgsalary_history" ToRole="lgemployee" />
+        </EntityType>
+        <EntityType Name="lgvendor">
+          <Key>
+            <PropertyRef Name="vend_id" />
+          </Key>
+          <Property Name="vend_id" Type="Decimal" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="vend_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="vend_street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vend_city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vend_state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="vend_zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="lgproducts" Relationship="Self.lgsupplies" FromRole="lgvendor" ToRole="lgproduct" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__lgproduct__brand__398D8EEE">
+          <End Role="lgbrand" Type="Self.lgbrand" Multiplicity="0..1" />
+          <End Role="lgproduct" Type="Self.lgproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lgbrand">
+              <PropertyRef Name="brand_id" />
+            </Principal>
+            <Dependent Role="lgproduct">
+              <PropertyRef Name="brand_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lginvoice__cust___4AB81AF0">
+          <End Role="lgcustomer" Type="Self.lgcustomer" Multiplicity="0..1" />
+          <End Role="lginvoice" Type="Self.lginvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lgcustomer">
+              <PropertyRef Name="cust_code" />
+            </Principal>
+            <Dependent Role="lginvoice">
+              <PropertyRef Name="cust_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lgemploye__dept___4316F928">
+          <End Role="lgdepartment" Type="Self.lgdepartment" Multiplicity="0..1" />
+          <End Role="lgemployee" Type="Self.lgemployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lgdepartment">
+              <PropertyRef Name="dept_num" />
+            </Principal>
+            <Dependent Role="lgemployee">
+              <PropertyRef Name="dept_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lginvoice__emplo__4BAC3F29">
+          <End Role="lgemployee" Type="Self.lgemployee" Multiplicity="0..1" />
+          <End Role="lginvoice" Type="Self.lginvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lgemployee">
+              <PropertyRef Name="emp_num" />
+            </Principal>
+            <Dependent Role="lginvoice">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lgsalary___emp_n__45F365D3">
+          <End Role="lgemployee" Type="Self.lgemployee" Multiplicity="1" />
+          <End Role="lgsalary_history" Type="Self.lgsalary_history" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="lgemployee">
+              <PropertyRef Name="emp_num" />
+            </Principal>
+            <Dependent Role="lgsalary_history">
+              <PropertyRef Name="emp_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lgline__inv_num__4E88ABD4">
+          <End Role="lginvoice" Type="Self.lginvoice" Multiplicity="1" />
+          <End Role="lgline" Type="Self.lgline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lginvoice">
+              <PropertyRef Name="inv_num" />
+            </Principal>
+            <Dependent Role="lgline">
+              <PropertyRef Name="inv_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__lgline__prod_sku__4F7CD00D">
+          <End Role="lgproduct" Type="Self.lgproduct" Multiplicity="0..1" />
+          <End Role="lgline" Type="Self.lgline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lgproduct">
+              <PropertyRef Name="prod_sku" />
+            </Principal>
+            <Dependent Role="lgline">
+              <PropertyRef Name="prod_sku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="lgsupplies">
+          <End Role="lgproduct" Type="Self.lgproduct" Multiplicity="*" />
+          <End Role="lgvendor" Type="Self.lgvendor" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="HardwareDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="lgbrands" EntityType="Self.lgbrand" />
+          <EntitySet Name="lgcustomers" EntityType="Self.lgcustomer" />
+          <EntitySet Name="lgdepartments" EntityType="Self.lgdepartment" />
+          <EntitySet Name="lgemployees" EntityType="Self.lgemployee" />
+          <EntitySet Name="lginvoices" EntityType="Self.lginvoice" />
+          <EntitySet Name="lglines" EntityType="Self.lgline" />
+          <EntitySet Name="lgproducts" EntityType="Self.lgproduct" />
+          <EntitySet Name="lgsalary_history" EntityType="Self.lgsalary_history" />
+          <EntitySet Name="lgvendors" EntityType="Self.lgvendor" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK__lgproduct__brand__398D8EEE" Association="Self.FK__lgproduct__brand__398D8EEE">
+            <End Role="lgbrand" EntitySet="lgbrands" />
+            <End Role="lgproduct" EntitySet="lgproducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lginvoice__cust___4AB81AF0" Association="Self.FK__lginvoice__cust___4AB81AF0">
+            <End Role="lgcustomer" EntitySet="lgcustomers" />
+            <End Role="lginvoice" EntitySet="lginvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lgemploye__dept___4316F928" Association="Self.FK__lgemploye__dept___4316F928">
+            <End Role="lgdepartment" EntitySet="lgdepartments" />
+            <End Role="lgemployee" EntitySet="lgemployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lginvoice__emplo__4BAC3F29" Association="Self.FK__lginvoice__emplo__4BAC3F29">
+            <End Role="lgemployee" EntitySet="lgemployees" />
+            <End Role="lginvoice" EntitySet="lginvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lgsalary___emp_n__45F365D3" Association="Self.FK__lgsalary___emp_n__45F365D3">
+            <End Role="lgemployee" EntitySet="lgemployees" />
+            <End Role="lgsalary_history" EntitySet="lgsalary_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lgline__inv_num__4E88ABD4" Association="Self.FK__lgline__inv_num__4E88ABD4">
+            <End Role="lginvoice" EntitySet="lginvoices" />
+            <End Role="lgline" EntitySet="lglines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__lgline__prod_sku__4F7CD00D" Association="Self.FK__lgline__prod_sku__4F7CD00D">
+            <End Role="lgproduct" EntitySet="lgproducts" />
+            <End Role="lgline" EntitySet="lglines" />
+          </AssociationSet>
+          <AssociationSet Name="lgsupplies" Association="Self.lgsupplies">
+            <End Role="lgproduct" EntitySet="lgproducts" />
+            <End Role="lgvendor" EntitySet="lgvendors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HardwareDBModelStoreContainer" CdmEntityContainer="HardwareDBEntities">
+          <EntitySetMapping Name="lgbrands">
+            <EntityTypeMapping TypeName="HardwareDBModel.lgbrand">
+              <MappingFragment StoreEntitySet="lgbrand">
+                <ScalarProperty Name="brand_id" ColumnName="brand_id" />
+                <ScalarProperty Name="brand_name" ColumnName="brand_name" />
+                <ScalarProperty Name="brand_type" ColumnName="brand_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lgcustomers">
+            <EntityTypeMapping TypeName="HardwareDBModel.lgcustomer">
+              <MappingFragment StoreEntitySet="lgcustomer">
+                <ScalarProperty Name="cust_code" ColumnName="cust_code" />
+                <ScalarProperty Name="cust_fname" ColumnName="cust_fname" />
+                <ScalarProperty Name="cust_lname" ColumnName="cust_lname" />
+                <ScalarProperty Name="cust_street" ColumnName="cust_street" />
+                <ScalarProperty Name="cust_city" ColumnName="cust_city" />
+                <ScalarProperty Name="cust_state" ColumnName="cust_state" />
+                <ScalarProperty Name="cust_zip" ColumnName="cust_zip" />
+                <ScalarProperty Name="cust_balance" ColumnName="cust_balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lgdepartments">
+            <EntityTypeMapping TypeName="HardwareDBModel.lgdepartment">
+              <MappingFragment StoreEntitySet="lgdepartment">
+                <ScalarProperty Name="dept_num" ColumnName="dept_num" />
+                <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+                <ScalarProperty Name="dept_mail_box" ColumnName="dept_mail_box" />
+                <ScalarProperty Name="dept_phone" ColumnName="dept_phone" />
+                <ScalarProperty Name="emp_num" ColumnName="emp_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lgemployees">
+            <EntityTypeMapping TypeName="HardwareDBModel.lgemployee">
+              <MappingFragment StoreEntitySet="lgemployee">
+                <ScalarProperty Name="emp_num" ColumnName="emp_num" />
+                <ScalarProperty Name="emp_fname" ColumnName="emp_fname" />
+                <ScalarProperty Name="emp_lname" ColumnName="emp_lname" />
+                <ScalarProperty Name="emp_email" ColumnName="emp_email" />
+                <ScalarProperty Name="emp_phone" ColumnName="emp_phone" />
+                <ScalarProperty Name="emp_hireDATETIME" ColumnName="emp_hireDATETIME" />
+                <ScalarProperty Name="emp_title" ColumnName="emp_title" />
+                <ScalarProperty Name="emp_comm" ColumnName="emp_comm" />
+                <ScalarProperty Name="dept_num" ColumnName="dept_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lginvoices">
+            <EntityTypeMapping TypeName="HardwareDBModel.lginvoice">
+              <MappingFragment StoreEntitySet="lginvoice">
+                <ScalarProperty Name="inv_num" ColumnName="inv_num" />
+                <ScalarProperty Name="inv_DATETIME" ColumnName="inv_DATETIME" />
+                <ScalarProperty Name="cust_code" ColumnName="cust_code" />
+                <ScalarProperty Name="inv_total" ColumnName="inv_total" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lglines">
+            <EntityTypeMapping TypeName="HardwareDBModel.lgline">
+              <MappingFragment StoreEntitySet="lgline">
+                <ScalarProperty Name="inv_num" ColumnName="inv_num" />
+                <ScalarProperty Name="line_num" ColumnName="line_num" />
+                <ScalarProperty Name="prod_sku" ColumnName="prod_sku" />
+                <ScalarProperty Name="line_qty" ColumnName="line_qty" />
+                <ScalarProperty Name="line_price" ColumnName="line_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lgproducts">
+            <EntityTypeMapping TypeName="HardwareDBModel.lgproduct">
+              <MappingFragment StoreEntitySet="lgproduct">
+                <ScalarProperty Name="prod_sku" ColumnName="prod_sku" />
+                <ScalarProperty Name="prod_descript" ColumnName="prod_descript" />
+                <ScalarProperty Name="prod_type" ColumnName="prod_type" />
+                <ScalarProperty Name="prod_base" ColumnName="prod_base" />
+                <ScalarProperty Name="prod_category" ColumnName="prod_category" />
+                <ScalarProperty Name="prod_price" ColumnName="prod_price" />
+                <ScalarProperty Name="prod_qoh" ColumnName="prod_qoh" />
+                <ScalarProperty Name="prod_min" ColumnName="prod_min" />
+                <ScalarProperty Name="brand_id" ColumnName="brand_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lgsalary_history">
+            <EntityTypeMapping TypeName="HardwareDBModel.lgsalary_history">
+              <MappingFragment StoreEntitySet="lgsalary_history">
+                <ScalarProperty Name="emp_num" ColumnName="emp_num" />
+                <ScalarProperty Name="sal_from" ColumnName="sal_from" />
+                <ScalarProperty Name="sal_end" ColumnName="sal_end" />
+                <ScalarProperty Name="sal_amount" ColumnName="sal_amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lgvendors">
+            <EntityTypeMapping TypeName="HardwareDBModel.lgvendor">
+              <MappingFragment StoreEntitySet="lgvendor">
+                <ScalarProperty Name="vend_id" ColumnName="vend_id" />
+                <ScalarProperty Name="vend_name" ColumnName="vend_name" />
+                <ScalarProperty Name="vend_street" ColumnName="vend_street" />
+                <ScalarProperty Name="vend_city" ColumnName="vend_city" />
+                <ScalarProperty Name="vend_state" ColumnName="vend_state" />
+                <ScalarProperty Name="vend_zip" ColumnName="vend_zip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HardwareDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="lgsupplies" TypeName="HardwareDBModel.lgsupplies" StoreEntitySet="lgsupplies">
+            <EndProperty Name="lgproduct">
+              <ScalarProperty Name="prod_sku" ColumnName="prod_sku" />
+            </EndProperty>
+            <EndProperty Name="lgvendor">
+              <ScalarProperty Name="vend_id" ColumnName="vend_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

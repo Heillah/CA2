@@ -1,0 +1,81 @@
+﻿@model ClassActivity2.ViewModels.AdvancedVM
+@using ClassActivity2.ViewModels
+@using System.Globalization
+@using System.Data
+
+<h1>Sales by Employee</h1>
+
+<div class="criteria">
+    @* html form so that the user can enter the criteria they want to be displayed*@
+    @using (Html.BeginForm("Advanced", "Home", FormMethod.Post))
+    {
+        <label>Select Employee</label>
+        @Html.DropDownListFor(m => m.Selectedemp_num, Model.lgemployees, "--- Please Select ---", new { @class = "form-control" })
+        <label>From</label>
+        @Html.TextBoxFor(m => m.DateFrom, "yyyy-MM-dd", new { @Value = "2011-01-01", @type = "date", @class = "form-control" })
+        <label>To</label>
+        @Html.TextBoxFor(m => m.DateTo, "yyyy-MM-dd", new { @Value = "2011-12-30", @type = "date", @class = "form-control" })
+        <br />
+        <input type="submit" value="Generate" class="btn btn-primary" />
+    }
+</div>
+<hr />
+
+@*to show report if there is data*@
+@if (Model.employee != null)
+{
+    //this first panel shows general details of the selected vendor
+    <div class="panel panel-success">
+        <div class="panel-heading"><strong>Employee Details: </strong>@Model.employee.emp_fname</div>
+        <div class="panel-body">
+            <label>Hire Date: </label>@Model.employee.emp_hireDATETIME<br />
+            <label>Title: </label>@Model.employee.emp_title<br />
+        </div>
+
+    </div>
+
+    <div class="panel">
+        @if (Model.chartData != null)
+        {
+            //Load the result of the EmployeeOrdersChart view into an image
+            //This will make a call to the EmployeeOrdersChart controller action
+            <img src="@Url.Action("EmployeeSalesChart", "Home")" />
+        }
+
+    </div>
+
+
+    <div class="panel panel-info">
+        @foreach (var group in Model.results)
+        {
+            <h4>@group.Key:</h4>
+            <table class="table table-striped">
+                <tr>
+                    <th>Sale Date</th>
+                    <th>Amount</th>
+                    <th>Customer</th>
+                </tr>
+                @foreach (ReportRecord groupItem in group)
+                {
+                <tr>
+                    <td>@groupItem.INV_Date</td>
+                    <td>@groupItem.Amount.ToString("C", CultureInfo.CurrentCulture)</td>
+                    <td>@groupItem.Customer</td>
+                </tr>
+                }
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>@group.Sum(item => item.Amount).ToString("C", CultureInfo.CurrentCulture)</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <hr />
+        }
+        <h3>Grand Total: <strong>@Model.results.Sum(group => group.Sum(item => item.Amount)).ToString("C", CultureInfo.CurrentCulture)</strong></h3>
+    </div>
+    
+
+ }
+
+

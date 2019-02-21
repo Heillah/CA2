@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HardwareDBModelStoreContainer" CdmEntityContainer="HardwareDBEntities">
+    <EntitySetMapping Name="lgbrands">
+      <EntityTypeMapping TypeName="HardwareDBModel.lgbrand">
+        <MappingFragment StoreEntitySet="lgbrand">
+          <ScalarProperty Name="brand_id" ColumnName="brand_id" />
+          <ScalarProperty Name="brand_name" ColumnName="brand_name" />
+          <ScalarProperty Name="brand_type" ColumnName="brand_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lgcustomers">
+      <EntityTypeMapping TypeName="HardwareDBModel.lgcustomer">
+        <MappingFragment StoreEntitySet="lgcustomer">
+          <ScalarProperty Name="cust_code" ColumnName="cust_code" />
+          <ScalarProperty Name="cust_fname" ColumnName="cust_fname" />
+          <ScalarProperty Name="cust_lname" ColumnName="cust_lname" />
+          <ScalarProperty Name="cust_street" ColumnName="cust_street" />
+          <ScalarProperty Name="cust_city" ColumnName="cust_city" />
+          <ScalarProperty Name="cust_state" ColumnName="cust_state" />
+          <ScalarProperty Name="cust_zip" ColumnName="cust_zip" />
+          <ScalarProperty Name="cust_balance" ColumnName="cust_balance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lgdepartments">
+      <EntityTypeMapping TypeName="HardwareDBModel.lgdepartment">
+        <MappingFragment StoreEntitySet="lgdepartment">
+          <ScalarProperty Name="dept_num" ColumnName="dept_num" />
+          <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+          <ScalarProperty Name="dept_mail_box" ColumnName="dept_mail_box" />
+          <ScalarProperty Name="dept_phone" ColumnName="dept_phone" />
+          <ScalarProperty Name="emp_num" ColumnName="emp_num" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lgemployees">
+      <EntityTypeMapping TypeName="HardwareDBModel.lgemployee">
+        <MappingFragment StoreEntitySet="lgemployee">
+          <ScalarProperty Name="emp_num" ColumnName="emp_num" />
+          <ScalarProperty Name="emp_fname" ColumnName="emp_fname" />
+          <ScalarProperty Name="emp_lname" ColumnName="emp_lname" />
+          <ScalarProperty Name="emp_email" ColumnName="emp_email" />
+          <ScalarProperty Name="emp_phone" ColumnName="emp_phone" />
+          <ScalarProperty Name="emp_hireDATETIME" ColumnName="emp_hireDATETIME" />
+          <ScalarProperty Name="emp_title" ColumnName="emp_title" />
+          <ScalarProperty Name="emp_comm" ColumnName="emp_comm" />
+          <ScalarProperty Name="dept_num" ColumnName="dept_num" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lginvoices">
+      <EntityTypeMapping TypeName="HardwareDBModel.lginvoice">
+        <MappingFragment StoreEntitySet="lginvoice">
+          <ScalarProperty Name="inv_num" ColumnName="inv_num" />
+          <ScalarProperty Name="inv_DATETIME" ColumnName="inv_DATETIME" />
+          <ScalarProperty Name="cust_code" ColumnName="cust_code" />
+          <ScalarProperty Name="inv_total" ColumnName="inv_total" />
+          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lglines">
+      <EntityTypeMapping TypeName="HardwareDBModel.lgline">
+        <MappingFragment StoreEntitySet="lgline">
+          <ScalarProperty Name="inv_num" ColumnName="inv_num" />
+          <ScalarProperty Name="line_num" ColumnName="line_num" />
+          <ScalarProperty Name="prod_sku" ColumnName="prod_sku" />
+          <ScalarProperty Name="line_qty" ColumnName="line_qty" />
+          <ScalarProperty Name="line_price" ColumnName="line_price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lgproducts">
+      <EntityTypeMapping TypeName="HardwareDBModel.lgproduct">
+        <MappingFragment StoreEntitySet="lgproduct">
+          <ScalarProperty Name="prod_sku" ColumnName="prod_sku" />
+          <ScalarProperty Name="prod_descript" ColumnName="prod_descript" />
+          <ScalarProperty Name="prod_type" ColumnName="prod_type" />
+          <ScalarProperty Name="prod_base" ColumnName="prod_base" />
+          <ScalarProperty Name="prod_category" ColumnName="prod_category" />
+          <ScalarProperty Name="prod_price" ColumnName="prod_price" />
+          <ScalarProperty Name="prod_qoh" ColumnName="prod_qoh" />
+          <ScalarProperty Name="prod_min" ColumnName="prod_min" />
+          <ScalarProperty Name="brand_id" ColumnName="brand_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lgsalary_history">
+      <EntityTypeMapping TypeName="HardwareDBModel.lgsalary_history">
+        <MappingFragment StoreEntitySet="lgsalary_history">
+          <ScalarProperty Name="emp_num" ColumnName="emp_num" />
+          <ScalarProperty Name="sal_from" ColumnName="sal_from" />
+          <ScalarProperty Name="sal_end" ColumnName="sal_end" />
+          <ScalarProperty Name="sal_amount" ColumnName="sal_amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lgvendors">
+      <EntityTypeMapping TypeName="HardwareDBModel.lgvendor">
+        <MappingFragment StoreEntitySet="lgvendor">
+          <ScalarProperty Name="vend_id" ColumnName="vend_id" />
+          <ScalarProperty Name="vend_name" ColumnName="vend_name" />
+          <ScalarProperty Name="vend_street" ColumnName="vend_street" />
+          <ScalarProperty Name="vend_city" ColumnName="vend_city" />
+          <ScalarProperty Name="vend_state" ColumnName="vend_state" />
+          <ScalarProperty Name="vend_zip" ColumnName="vend_zip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="HardwareDBModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="lgsupplies" TypeName="HardwareDBModel.lgsupplies" StoreEntitySet="lgsupplies">
+      <EndProperty Name="lgproduct">
+        <ScalarProperty Name="prod_sku" ColumnName="prod_sku" />
+      </EndProperty>
+      <EndProperty Name="lgvendor">
+        <ScalarProperty Name="vend_id" ColumnName="vend_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
